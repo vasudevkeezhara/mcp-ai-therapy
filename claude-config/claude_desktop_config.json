@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "ai-therapy-memory": {
+      "command": "/Users/dionhagan-mini/Documents/augment-projects/ai-therapy/mcp-server/venv/bin/python",
+      "args": [
+        "/Users/dionhagan-mini/Documents/augment-projects/ai-therapy/mcp-server/src/main.py"
+      ],
+      "env": {
+        "MEMORY_DATA_DIR": "/Users/dionhagan-mini/Documents/augment-projects/ai-therapy/memory_data",
+        "OPENAI_API_KEY": "your-openai-api-key-here",
+        "LOG_LEVEL": "INFO"
+      }
+    }
+  }
+}

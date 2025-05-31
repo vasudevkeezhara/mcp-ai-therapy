@@ -1,0 +1,22 @@
+# AI Therapy MCP Server Dependencies
+
+# Core MCP framework
+mcp>=1.0.0
+
+# OpenAI for embeddings and semantic search
+openai>=1.0.0
+
+# Numerical computing for vector operations
+numpy>=1.24.0
+
+# Date/time utilities
+python-dateutil>=2.8.0
+
+# Data validation and parsing
+pydantic>=2.0.0
+
+# Development and testing (optional)
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+mypy>=1.0.0
