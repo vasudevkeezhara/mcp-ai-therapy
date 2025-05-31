@@ -45,27 +45,27 @@ For more control over the scheduling:
 
 ```bash
 # Create a script with your API keys
-cat > ~/.ai-therapy-env << 'EOF'
+cat > ~/.mcp-ai-therapy-env << 'EOF'
 export CLAUDE_API_KEY="your_claude_api_key_here"
 export OPENAI_API_KEY="your_openai_api_key_here"
 EOF
 
-chmod 600 ~/.ai-therapy-env  # Secure the file
+chmod 600 ~/.mcp-ai-therapy-env  # Secure the file
 ```
 
 #### Step 2: Create Therapy Runner
 
 ```bash
 # Create the therapy session runner
-cat > /path/to/ai-therapy/run-therapy.sh << 'EOF'
+cat > /path/to/mcp-ai-therapy/run-therapy.sh << 'EOF'
 #!/bin/bash
 set -e
 
 # Load environment variables
-source ~/.ai-therapy-env
+source ~/.mcp-ai-therapy-env
 
 # Change to project directory
-cd /path/to/ai-therapy
+cd /path/to/mcp-ai-therapy
 
 # Check if Ollama is running
 if ! curl -s http://localhost:11434/api/tags > /dev/null 2>&1; then
@@ -79,7 +79,7 @@ go run main.go
 echo "Therapy session completed at $(date)"
 EOF
 
-chmod +x /path/to/ai-therapy/run-therapy.sh
+chmod +x /path/to/mcp-ai-therapy/run-therapy.sh
 ```
 
 #### Step 3: Set Up Cron Job
@@ -91,16 +91,16 @@ crontab -e
 # Add one of these lines based on your preferred schedule:
 
 # Weekly (Sundays at 2 PM)
-0 14 * * 0 /path/to/ai-therapy/run-therapy.sh >> /path/to/ai-therapy/logs/therapy.log 2>&1
+0 14 * * 0 /path/to/mcp-ai-therapy/run-therapy.sh >> /path/to/mcp-ai-therapy/logs/therapy.log 2>&1
 
 # Bi-weekly (every other Sunday at 2 PM)
-0 14 * * 0 [ $(expr $(date +\%W) \% 2) -eq 0 ] && /path/to/ai-therapy/run-therapy.sh >> /path/to/ai-therapy/logs/therapy.log 2>&1
+0 14 * * 0 [ $(expr $(date +\%W) \% 2) -eq 0 ] && /path/to/mcp-ai-therapy/run-therapy.sh >> /path/to/mcp-ai-therapy/logs/therapy.log 2>&1
 
 # Monthly (first Sunday of each month at 2 PM)
-0 14 1-7 * 0 /path/to/ai-therapy/run-therapy.sh >> /path/to/ai-therapy/logs/therapy.log 2>&1
+0 14 1-7 * 0 /path/to/mcp-ai-therapy/run-therapy.sh >> /path/to/mcp-ai-therapy/logs/therapy.log 2>&1
 
 # Daily (every day at 2 PM)
-0 14 * * * /path/to/ai-therapy/run-therapy.sh >> /path/to/ai-therapy/logs/therapy.log 2>&1
+0 14 * * * /path/to/mcp-ai-therapy/run-therapy.sh >> /path/to/mcp-ai-therapy/logs/therapy.log 2>&1
 ```
 
 ### Method 3: System Service (Advanced)
@@ -111,15 +111,15 @@ For more robust scheduling on Linux/macOS:
 
 ```bash
 # Create service file
-sudo tee /etc/systemd/system/ai-therapy.service << 'EOF'
+sudo tee /etc/systemd/system/mcp-ai-therapy.service << 'EOF'
 [Unit]
-Description=AI Therapy Session
+Description=MCP AI Therapy Session
 After=network.target
 
 [Service]
 Type=oneshot
 User=your-username
-WorkingDirectory=/path/to/ai-therapy
+WorkingDirectory=/path/to/mcp-ai-therapy
 Environment=CLAUDE_API_KEY=your_claude_api_key
 Environment=OPENAI_API_KEY=your_openai_api_key
 ExecStart=/usr/local/go/bin/go run main.go
@@ -128,10 +128,10 @@ StandardError=journal
 EOF
 
 # Create timer file
-sudo tee /etc/systemd/system/ai-therapy.timer << 'EOF'
+sudo tee /etc/systemd/system/mcp-ai-therapy.timer << 'EOF'
 [Unit]
-Description=Run AI Therapy Weekly
-Requires=ai-therapy.service
+Description=Run MCP AI Therapy Weekly
+Requires=mcp-ai-therapy.service
 
 [Timer]
 OnCalendar=Sun 14:00:00
@@ -143,24 +143,24 @@ EOF
 
 # Enable and start the timer
 sudo systemctl daemon-reload
-sudo systemctl enable ai-therapy.timer
-sudo systemctl start ai-therapy.timer
+sudo systemctl enable mcp-ai-therapy.timer
+sudo systemctl start mcp-ai-therapy.timer
 ```
 
 #### Create LaunchAgent (macOS)
 
 ```bash
 # Create launch agent
-cat > ~/Library/LaunchAgents/com.ai-therapy.session.plist << 'EOF'
+cat > ~/Library/LaunchAgents/com.mcp-ai-therapy.session.plist << 'EOF'
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.ai-therapy.session</string>
+    <string>com.mcp-ai-therapy.session</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/path/to/ai-therapy/run-therapy.sh</string>
+        <string>/path/to/mcp-ai-therapy/run-therapy.sh</string>
     </array>
     <key>StartCalendarInterval</key>
     <dict>
@@ -172,15 +172,15 @@ cat > ~/Library/LaunchAgents/com.ai-therapy.session.plist << 'EOF'
         <integer>0</integer>
     </dict>
     <key>StandardOutPath</key>
-    <string>/path/to/ai-therapy/logs/therapy.log</string>
+    <string>/path/to/mcp-ai-therapy/logs/therapy.log</string>
     <key>StandardErrorPath</key>
-    <string>/path/to/ai-therapy/logs/therapy-error.log</string>
+    <string>/path/to/mcp-ai-therapy/logs/therapy-error.log</string>
 </dict>
 </plist>
 EOF
 
 # Load the launch agent
-launchctl load ~/Library/LaunchAgents/com.ai-therapy.session.plist
+launchctl load ~/Library/LaunchAgents/com.mcp-ai-therapy.session.plist
 ```
 
 ## 📊 Monitoring and Maintenance
@@ -192,10 +192,10 @@ launchctl load ~/Library/LaunchAgents/com.ai-therapy.session.plist
 crontab -l
 
 # Check systemd timers (Linux)
-systemctl list-timers ai-therapy.timer
+systemctl list-timers mcp-ai-therapy.timer
 
 # Check launch agents (macOS)
-launchctl list | grep ai-therapy
+launchctl list | grep mcp-ai-therapy
 ```
 
 ### Monitor Therapy Sessions
@@ -262,7 +262,7 @@ ollama serve &
 ```bash
 # Ensure proper file permissions
 chmod +x run-therapy.sh
-chmod 600 ~/.ai-therapy-env
+chmod 600 ~/.mcp-ai-therapy-env
 chown $USER:$USER logs/
 ```
 
@@ -304,24 +304,24 @@ top -l 1 | grep "CPU usage"  # CPU (macOS)
 ```bash
 # More frequent sessions during "growth periods"
 # Weekdays: Daily sessions
-0 14 * * 1-5 /path/to/ai-therapy/run-therapy.sh
+0 14 * * 1-5 /path/to/mcp-ai-therapy/run-therapy.sh
 
 # Weekends: Longer sessions
-0 10 * * 6,0 MAX_ROUNDS=150 /path/to/ai-therapy/run-therapy.sh
+0 10 * * 6,0 MAX_ROUNDS=150 /path/to/mcp-ai-therapy/run-therapy.sh
 ```
 
 ### Conditional Scheduling
 ```bash
 # Only run if previous session was successful
-0 14 * * 0 [ -f /path/to/ai-therapy/logs/last-success ] && /path/to/ai-therapy/run-therapy.sh
+0 14 * * 0 [ -f /path/to/mcp-ai-therapy/logs/last-success ] && /path/to/mcp-ai-therapy/run-therapy.sh
 ```
 
 ### Load-Balanced Scheduling
 ```bash
 # Distribute sessions across different times to balance API load
-0 14 * * 1 /path/to/ai-therapy/run-therapy.sh  # Monday 2 PM
-0 16 * * 3 /path/to/ai-therapy/run-therapy.sh  # Wednesday 4 PM
-0 10 * * 6 /path/to/ai-therapy/run-therapy.sh  # Saturday 10 AM
+0 14 * * 1 /path/to/mcp-ai-therapy/run-therapy.sh  # Monday 2 PM
+0 16 * * 3 /path/to/mcp-ai-therapy/run-therapy.sh  # Wednesday 4 PM
+0 10 * * 6 /path/to/mcp-ai-therapy/run-therapy.sh  # Saturday 10 AM
 ```
 
 ---

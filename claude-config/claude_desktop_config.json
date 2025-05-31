@@ -3,10 +3,10 @@
     "ai-therapy-memory": {
       "command": "/path/to/your/python",
       "args": [
-        "/path/to/ai-therapy/mcp-server/src/main.py"
+        "/path/to/mcp-ai-therapy/mcp-server/src/main.py"
       ],
       "env": {
-        "MEMORY_DATA_DIR": "/path/to/ai-therapy/memory_data",
+        "MEMORY_DATA_DIR": "/path/to/mcp-ai-therapy/memory_data",
         "OPENAI_API_KEY": "your-openai-api-key-here",
         "LOG_LEVEL": "INFO"
       }

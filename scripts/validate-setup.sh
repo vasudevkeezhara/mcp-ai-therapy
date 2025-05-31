@@ -29,9 +29,9 @@ check_requirement() {
     local command="$2"
     local success_message="$3"
     local failure_message="$4"
-    
+
     echo -n "Checking $description... "
-    
+
     if eval "$command" > /dev/null 2>&1; then
         echo -e "${GREEN}✅ $success_message${NC}"
         return 0
@@ -48,9 +48,9 @@ check_file() {
     local file_path="$2"
     local success_message="$3"
     local failure_message="$4"
-    
+
     echo -n "Checking $description... "
-    
+
     if [[ -f "$file_path" ]]; then
         echo -e "${GREEN}✅ $success_message${NC}"
         return 0
@@ -67,9 +67,9 @@ check_directory() {
     local dir_path="$2"
     local success_message="$3"
     local failure_message="$4"
-    
+
     echo -n "Checking $description... "
-    
+
     if [[ -d "$dir_path" ]] && [[ -n "$(ls -A "$dir_path" 2>/dev/null)" ]]; then
         echo -e "${GREEN}✅ $success_message${NC}"
         return 0
@@ -98,7 +98,7 @@ check_requirement "Python installation" \
 check_file "Project structure" \
     "$PROJECT_DIR/main.go" \
     "Found main.go - in correct project directory" \
-    "main.go not found - run this script from the ai-therapy directory"
+    "main.go not found - run this script from the mcp-ai-therapy directory"
 
 echo
 echo -e "${YELLOW}🧠 Part 2: Therapy Session Components${NC}"
@@ -191,7 +191,7 @@ if [[ -f "$CLAUDE_CONFIG_PATH" ]]; then
         echo -e "${RED}❌ Config syntax is invalid - check JSON format${NC}"
         VALIDATION_PASSED=false
     fi
-    
+
     # Check if config contains ai-therapy-memory server
     echo -n "Checking MCP server configuration... "
     if grep -q "ai-therapy-memory" "$CLAUDE_CONFIG_PATH"; then

@@ -23,7 +23,7 @@ echo
 
 # Check if we're in the right directory
 if [[ ! -f "$PROJECT_DIR/main.go" ]]; then
-    echo -e "${RED}❌ Error: This script must be run from the ai-therapy project directory${NC}"
+    echo -e "${RED}❌ Error: This script must be run from the mcp-ai-therapy project directory${NC}"
     echo "Current directory: $(pwd)"
     echo "Expected to find: $PROJECT_DIR/main.go"
     exit 1
@@ -92,24 +92,24 @@ echo -e "${GREEN}✅ Created therapy runner script: $THERAPY_SCRIPT${NC}"
 setup_cron() {
     local schedule="$1"
     local description="$2"
-    
+
     echo -e "${YELLOW}📅 Setting up cron job for $description...${NC}"
-    
+
     # Create a temporary cron file
     local temp_cron=$(mktemp)
-    
+
     # Get existing crontab (if any)
     crontab -l 2>/dev/null > "$temp_cron" || true
-    
+
     # Add our therapy session
     echo "# AI Therapy - $description" >> "$temp_cron"
     echo "$schedule cd $PROJECT_DIR && ./run-therapy.sh >> $PROJECT_DIR/logs/therapy-cron.log 2>&1" >> "$temp_cron"
     echo "" >> "$temp_cron"
-    
+
     # Install the new crontab
     crontab "$temp_cron"
     rm "$temp_cron"
-    
+
     echo -e "${GREEN}✅ Cron job installed for $description${NC}"
     echo "Schedule: $schedule"
     echo "Command: cd $PROJECT_DIR && ./run-therapy.sh"

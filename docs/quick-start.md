@@ -29,7 +29,7 @@ Before starting, ensure you have:
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd ai-therapy
+cd mcp-ai-therapy
 
 # Install Go dependencies
 go mod tidy
@@ -115,9 +115,9 @@ cp claude-config/claude_desktop_config.json ~/Library/Application\ Support/Claud
   "mcpServers": {
     "ai-therapy-memory": {
       "command": "/usr/local/bin/python3",
-      "args": ["/path/to/ai-therapy/mcp-server/src/main.py"],
+      "args": ["/path/to/mcp-ai-therapy/mcp-server/src/main.py"],
       "env": {
-        "MEMORY_DATA_DIR": "/path/to/ai-therapy/memory_data",
+        "MEMORY_DATA_DIR": "/path/to/mcp-ai-therapy/memory_data",
         "OPENAI_API_KEY": "your-openai-api-key",
         "LOG_LEVEL": "INFO"
       }

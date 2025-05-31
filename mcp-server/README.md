@@ -103,9 +103,9 @@ cp ../claude-config/claude_desktop_config.json ~/Library/Application\ Support/Cl
   "mcpServers": {
     "ai-therapy-memory": {
       "command": "/usr/local/bin/python3",
-      "args": ["/Users/yourname/ai-therapy/mcp-server/src/main.py"],
+      "args": ["/Users/yourname/mcp-ai-therapy/mcp-server/src/main.py"],
       "env": {
-        "MEMORY_DATA_DIR": "/Users/yourname/ai-therapy/memory_data",
+        "MEMORY_DATA_DIR": "/Users/yourname/mcp-ai-therapy/memory_data",
         "OPENAI_API_KEY": "your-openai-api-key-here",
         "LOG_LEVEL": "INFO"
       }
