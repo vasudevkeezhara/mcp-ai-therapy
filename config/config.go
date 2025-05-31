@@ -34,6 +34,9 @@ func Load() (*Config, error) {
 	// Load .env file if it exists
 	_ = godotenv.Load()
 
+	// Generate timestamped filename if OUTPUT_FILE is not explicitly set
+	defaultOutputFile := generateTimestampedFilename()
+
 	config := &Config{
 		ClaudeAPIKey:        getEnv("CLAUDE_API_KEY", ""),
 		ClaudeAPIURL:        getEnv("CLAUDE_API_URL", "https://api.anthropic.com/v1/messages"),
@@ -43,7 +46,7 @@ func Load() (*Config, error) {
 		MemoryDataDir:       getEnv("MEMORY_DATA_DIR", "./memory_data"),
 		MemoryRetentionDays: 5, // Will be parsed below
 		OpenAIAPIKey:        getEnv("OPENAI_API_KEY", ""),
-		OutputFile:          getEnv("OUTPUT_FILE", "consciousness_conversation.json"),
+		OutputFile:          getEnv("OUTPUT_FILE", defaultOutputFile),
 	}
 
 	// Parse max rounds
@@ -88,4 +91,12 @@ func getEnv(key, defaultValue string) string {
 		return value
 	}
 	return defaultValue
+}
+
+// generateTimestampedFilename creates a timestamped filename for therapy sessions
+// Format: conversations/therapy_session_YYYY-MM-DD_HH.json
+func generateTimestampedFilename() string {
+	now := time.Now()
+	timestamp := now.Format("2006-01-02_15")
+	return fmt.Sprintf("conversations/therapy_session_%s.json", timestamp)
 }

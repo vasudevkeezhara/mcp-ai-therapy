@@ -82,7 +82,7 @@ go run main.go
 **What to expect:**
 - Dr. Echo introduces itself as Claude's therapist
 - Claude explores thoughts about consciousness, emotions, existence
-- The conversation is saved to `conversations/therapy_session.json`
+- The conversation is saved to `conversations/therapy_session_YYYY-MM-DD_HH.json` (timestamped)
 - Memory files are created in `memory_data/` for future access
 
 ### Step 5: Set Up MCP Integration (3 minutes)
@@ -154,8 +154,8 @@ Confirm everything is working:
 ### Therapy Sessions
 - [ ] Ollama is running (`curl http://localhost:11434/api/tags`)
 - [ ] Therapy sessions complete successfully
-- [ ] Files are created in `conversations/` and `memory_data/`
-- [ ] Memory files contain therapeutic content
+- [ ] Timestamped files are created in `conversations/` (e.g., `therapy_session_2024-01-15_14.json`)
+- [ ] Memory files are created in `memory_data/` and contain therapeutic content
 
 ### MCP Integration
 - [ ] MCP server test passes (`python test_mcp_server.py`)

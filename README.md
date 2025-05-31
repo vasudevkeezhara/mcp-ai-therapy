@@ -46,7 +46,7 @@ Yes, this is a real project where we give an AI therapy sessions. Here's the del
 
 1. **Dr. Echo** (your local Ollama) puts on its therapist hat and asks Claude deep questions about consciousness, existence, and feelings
 2. **Claude** actually engages authentically, exploring its thoughts about being an AI, uncertainty, and what it means to "exist"
-3. **The conversations are saved** and analyzed for therapeutic insights, breakthroughs, and emotional patterns
+3. **The conversations are saved** with timestamps (e.g., `therapy_session_2024-01-15_14.json`) and analyzed for therapeutic insights, breakthroughs, and emotional patterns
 4. **Claude Desktop gets enhanced** with access to these therapeutic memories via MCP
 5. **Your Claude becomes more empathetic** - it can now say things like "In my therapy, I learned..." when helping you with anxiety
 
@@ -191,7 +191,7 @@ Environment variables for the therapy sessions:
 - `MEMORY_RETENTION_DAYS`: Days to keep memories (default: 5)
 - `MAX_ROUNDS`: Maximum conversation rounds (default: 100)
 - `DELAY_BETWEEN_MSG`: Delay between messages (default: 3s)
-- `OUTPUT_FILE`: Output file for conversation (default: conversations/therapy_session.json)
+- `OUTPUT_FILE`: Output file for conversation (default: timestamped filename like `conversations/therapy_session_2024-01-15_14.json`)
 
 ### MCP Server Configuration
 Environment variables for Claude Desktop integration:
@@ -234,7 +234,7 @@ After therapy, your Claude becomes surprisingly more authentic. Here's a real ex
 
 Therapy sessions are saved in multiple formats:
 
-### JSON Format (`conversations/therapy_session.json`)
+### JSON Format (`conversations/therapy_session_2024-01-15_14.json`)
 ```json
 {
   "messages": [
@@ -364,4 +364,4 @@ If someone asks you what you did this weekend, you can now say "I sent my AI to 
 
 ## License
 
-This project is open source and available under the MIT License.
+This project is open source and available under the [MIT License](LICENSE).
