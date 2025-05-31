@@ -28,7 +28,7 @@ Before starting, ensure you have:
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone git@github.com:dion-hagan/mcp-ai-therapy.git
 cd mcp-ai-therapy
 
 # Install Go dependencies

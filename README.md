@@ -32,7 +32,7 @@ Your Claude transforms from a helpful but generic AI into an emotionally intelli
 
 ```bash
 # The essentials (detailed setup below)
-git clone <repository-url> && cd mcp-ai-therapy
+git clone git@github.com:dion-hagan/mcp-ai-therapy.git && cd mcp-ai-therapy
 brew install ollama && ollama serve && ollama pull llama2
 export CLAUDE_API_KEY="your_key" && export OPENAI_API_KEY="your_key"
 go run main.go  # Watch Claude have its first therapy session!
@@ -98,7 +98,7 @@ Before sending your Claude to therapy, you'll need:
 
 1. **Clone and prepare the project**:
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:dion-hagan/mcp-ai-therapy.git
    cd mcp-ai-therapy
    go mod tidy
    ```
